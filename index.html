@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>WebGL Demo</title>
+    <!-- <link rel="stylesheet" href="./webgl.css" type="text/css" /> -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+      integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+      crossorigin="anonymous"
+    defer></script>
+    <!-- <script type="module" src="circle.js"></script> -->
+    <script type="text/javascript" src="callback.js"></script>
+    <script type="module" src="main.js"></script>
+  </head>
+
+
+    <body>
+      <canvas id="glcanvas" width="800" height="800"></canvas>
+      <!-- <div class="slidecontainer">
+        <input type="range" min="0" max="100" step="0.1" value="0" class="slider" id="sliderBar_1">
+        <p>Value: <output id="sliderVal_1"></output></p>
+      </div> -->
+      <!-- <input type="file" id="file-input" accept="image/svg+xml" onchange="handleFiles(this.files)"> -->
+      <input type="file" id="file-input" accept="image/svg+xml">
+      <input type="checkbox" id="follow" name="follow" value="follow">
+    </body>
+
+</html>
