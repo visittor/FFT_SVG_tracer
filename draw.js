@@ -77,17 +77,16 @@ function draw(gl, polygonDrawer_svg, polygonDrawer_fft, rotateAng, drawOption)
 
         for(var i = 1; i < N; i++)
         {
-            const lineWidth = Math.max(0.2, 2. - 10.*i/N);
+            const circleR = Math.max(0.2, 2. - 10.*i/N);
+            const lineWidth = circleR / 4;
             
             drawLine(gl, pos[i].real, pos[i].imag, pos[i-1].real, pos[i-1].imag, [1,1,1,1], lineWidth, viewProjMat);
 
             var mat = mat4.create();
             mat4.translate(mat, mat, [pos[i].real, pos[i].imag, 0]);
             mat4.mul(mat, viewMat, mat);
-            // if (lineWidth > 1 || true)
-            {
-                drawCircle(gl, lineWidth, [1., 1., 1., 1], mat, projMat, true);
-            }
+
+            drawCircle(gl, circleR, [1., 1., 1., 1], mat, projMat, true);
 
             mat = mat4.create();
             mat4.translate(mat, mat, [pos[i-1].real, pos[i-1].imag, 0]);
