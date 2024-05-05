@@ -19,7 +19,7 @@ function draw(gl, polygonDrawer_svg, polygonDrawer_fft, rotateAng, drawOption)
         const len = ft.real.length;
         index = Math.floor(rotateAng * len / 30) % len;
         const t = index / len;
-        pos = sumFT(ft, t, 126);
+        pos = sumFT(ft, t, 512);
     }
 
     
@@ -52,7 +52,7 @@ function draw(gl, polygonDrawer_svg, polygonDrawer_fft, rotateAng, drawOption)
     if(drawOption.followTip && ft !== null)
     {
         const N = 
-        mat4.translate(viewMat, viewMat, [-pos[pos.length-100].real, -pos[pos.length-100].imag, 0]);
+        mat4.translate(viewMat, viewMat, [-pos[pos.length-200].real, -pos[pos.length-200].imag, 0]);
     }
 
     const modelMat = mat4.create();
@@ -77,7 +77,7 @@ function draw(gl, polygonDrawer_svg, polygonDrawer_fft, rotateAng, drawOption)
 
         for(var i = 1; i < N; i++)
         {
-            const circleR = Math.max(0.2, 2. - 10.*i/N);
+            const circleR = Math.max(0.05, 2. - 20.*i/N);
             const lineWidth = circleR / 4;
             
             drawLine(gl, pos[i].real, pos[i].imag, pos[i-1].real, pos[i-1].imag, [1,1,1,1], lineWidth, viewProjMat);
@@ -94,7 +94,7 @@ function draw(gl, polygonDrawer_svg, polygonDrawer_fft, rotateAng, drawOption)
             const diffX = pos[i].real - pos[i-1].real;
             const diffY = pos[i].imag - pos[i-1].imag;
             const r = Math.sqrt(diffX*diffX + diffY*diffY);
-            drawCircle(gl, r, [1., 1., 1., 0.3], mat, projMat, false);
+            drawCircle(gl, r, [1., 1., 1., 0.1], mat, projMat, false);
         }
     }
     const modelViewMat_smallCircle = mat4.create();

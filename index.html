@@ -9,21 +9,95 @@
       integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
       crossorigin="anonymous"
     defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <!-- <script type="module" src="circle.js"></script> -->
     <script type="text/javascript" src="callback.js"></script>
     <script type="module" src="main.js"></script>
+
+    <style>
+      canvas {
+        /* position: absolute; */
+        /* width: 1100px; */
+        /* height: 700px; */
+        /* z-index: 15; */
+        /* top: 50%; */
+        /* left: 100%; */
+        /* margin: 0 0 0 -700px; */
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        background: black;
+      }
+      body {
+        background: black;
+        color: white; 
+        font-family: Georgia, "New Century Schoolbook", Times, serif;
+        line-height: 1.8;
+      }
+      header {
+        position: relative;
+        width: 720px;
+        font-size: 34px;
+        /* top: 900px; */
+        left: 50%;
+        margin: 0 0 0 -360px;
+        color: white;
+        /* padding: 20px; */
+      }
+      #myText {
+        position: relative;
+        width: 720px;
+        font-size: 20px;
+        /* top: 900px; */
+        left: 50%;
+        margin: 0 0 0 -360px;
+        color: white;
+        /* padding: 20px; */
+      }
+    </style>
+
   </head>
+  
+  <body>
+    <div>
+      <center>
+        <canvas id="glcanvas" width="720px" height="720px"></canvas>
+      </center>
 
+      <center>
+        <input type="file" id="file-input" accept="image/svg+xml">
+        <input type="checkbox" id="follow" name="follow" value="follow">
+      </center>
+      <p id="myText">
+        Inspired by one of the video from 3Blue1Brown via <a href="https://youtu.be/r6sGWTCMz2k?t=1230">youtube</a>, 
+        I created SVG tracer in which it reads a SVG file, calculates the fourier transform of the path 
+        presented in the SVG file and traces the path reading from the SVG file.
+      </p>
+      <br>
+      <header>
+        <b>
+          How it works
+        </b>
+      </header>
+      <p id="myText">
+        Every (continueous) function \(f(t)\) can be represented with sumation of the sinodial function in form 
+        of \(f(t) = \int_{-\infty}^{\infty} a(x)e^{-2\pi itx} dx\). Intuitively, it is like connecting an infinite 
+        number of joints with each joint rotates at the frequency of \(x\) and has length of \(a(x)\) together. If 
+        we choose the appropiate value of \(a(x)\), the end point of this connecting joints will trace the path of \(f(t)\).
+      </p>
+      <br>
+      <p id="myText">
+        In the code in this repository, we do exactly that. We, first, read the SVG file which contains path 
+        ( \(f(t)\) ). We sample \(2^{n}\) points from this path. Then, find the value of \(a(x)\) using the algorithm 
+        called Fast Fourier Transform (FFT). Each rotating joints in the demo represents each term of the fourier 
+        series. They rotate at different speed which depends the value of \(x\). You can see that the first and 
+        second joint are rotate once every cycle (but in different direction), while third and fourth joint rotate 
+        twice every cycle and so on. The length of each joint represents the value of \(a(x)\) which we get from 
+        FFT. When we connect these joints together, we can trace the SVG path using the end point.
+      </p>
 
-    <body>
-      <canvas id="glcanvas" width="1600" height="1600"></canvas>
-      <!-- <div class="slidecontainer">
-        <input type="range" min="0" max="100" step="0.1" value="0" class="slider" id="sliderBar_1">
-        <p>Value: <output id="sliderVal_1"></output></p>
-      </div> -->
-      <!-- <input type="file" id="file-input" accept="image/svg+xml" onchange="handleFiles(this.files)"> -->
-      <input type="file" id="file-input" accept="image/svg+xml">
-      <input type="checkbox" id="follow" name="follow" value="follow">
-    </body>
+    </div>
+  </body>
 
 </html>

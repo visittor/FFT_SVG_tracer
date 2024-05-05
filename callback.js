@@ -1,7 +1,7 @@
 import { fft } from "./FFT.js";
 import { sumFT } from "./FFT.js";
 
-const NUM_POINTS=512;
+const NUM_POINTS=1024;
 var points = [];
 var ft = null;
 
@@ -21,7 +21,6 @@ function handleFiles(files, polygonDrawer_svg, polygonDrawer_fft)
 
         const all_path = path_arr.concat(rect_arr);
 
-        console.log(all_path);
         const numpoints_per_path = Math.floor(NUM_POINTS / all_path.length);
         for(var i = 0; i < all_path.length; i++)
         {
@@ -54,7 +53,7 @@ function handleFiles(files, polygonDrawer_svg, polygonDrawer_fft)
         var points_ft = [];
         for (var i = 0; i < ft.real.length; i++)
         {
-            const pt = sumFT(ft, i / ft.real.length, 126);
+            const pt = sumFT(ft, i / ft.real.length, 512);
             points_ft.push(pt[pt.length-1].real);
             points_ft.push(pt[pt.length-1].imag);
         }

@@ -90,7 +90,6 @@ class PolygonDrawer{
         )
 
         this.gl.useProgram(this.#programInfo.program);
-        console.log(this.gl.getProgramParameter(this.#programInfo.program, this.gl.LINK_STATUS));
         this.gl.uniform4f(
             this.#programInfo.uniformLocs.color,
             color[0], color[1], color[2], color[3],
